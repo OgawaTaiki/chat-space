@@ -1,0 +1,42 @@
+.wrapper
+  .chat
+    .header
+      .left-header
+        .left-header__title
+          GROUP
+        %ul.left-header__members
+          Member：
+          %li.member
+            AAAAAAAAAAAA
+          %li.member
+            BBBBBBBBBBBB
+      .right-header
+        .right-header__button
+          Edit
+    .messages
+      .message
+        .upper-message
+          .upper-message__user-name
+            MEMBER
+          .upper-message__date
+            1994-09-13
+        .lower-meesage
+          .lower-message__content
+            MESSAGE
+      .message
+        .upper-message
+          .upper-message__user-name
+            MEMBER2
+          .upper-message__date
+            2019-06-13
+        .lower-meesage
+          .lower-message__content
+            MESSAGE
+    .form
+      %form
+        %input.form__message
+        .form__mask
+          %label.form__mask__image
+            = fa_icon 'picture-o', class: 'icon'
+            %input.hidden{type: 'file'}
+        %input.form__submit{type: 'submit', value: 'Send'}
