@@ -1,17 +1,17 @@
-$(document).on('turbolinks:load', function() {
+$(function() {
   function buildHTML(message){
     var addImage = '';
     if (message.image.url) {
       addImage = `<img src="${message.image.url}" class="lower-message__image">`;
     }
     var html = `
-        <div class="chat__contents__content" data-message-id="${message.id}">
-          <div class="chat__contents__content-top" data-message-id="${message.id}">
-            <div class="chat__contents__content-top__user">${message.name}</div>
-            <div class="chat__contents__content-top__timestamp">${message.date}</div>
+        <div class="message" data-message-id="${message.id}">
+          <div class="upper-message" data-message-id="${message.id}">
+            <div class="upper-message__user-name">${message.name}</div>
+            <div class="upper-message__date">${message.date}</div>
           </div>
-          <div class="chat__contents__content__text">
-            <p class="chat__contents__content__text">
+          <div class="lower-message">
+            <p class="lower-message__content">
               ${message.content}
             </p>
             ${addImage}
@@ -33,13 +33,14 @@ $(document).on('turbolinks:load', function() {
     })
     .done(function(message) {
       var html = buildHTML(message);
-      $('.chat__contents').append(html)
+      $('.messages').append(html)
       $('.form__message').val('');
-      $('.btn').prop('disabled', false);
-      $('.chat').animate({scrollTop: $('.chat__contents')[0].scrollHeight}, 'fast');
+      $('.form__submit').prop('disabled', false);
+      $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 200);
       $('.hidden').remove();
     })
     .fail(function(message) {
       alert('メッセージを入力してください');
     })
   })
+})
