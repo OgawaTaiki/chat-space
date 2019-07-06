@@ -44,4 +44,33 @@ $(function() {
       $('.form__submit').prop('disabled', false);
     })
   })
-})
+
+  var reloadMessages = function() {
+    if (window.location.href.match(/\/groups\/\d+\/messages/)){  
+      var last_message_id = $('.message:last').data('message-id')
+      
+      $.ajax({
+        url: 'api/messages',
+        type: 'get',
+        dataType: 'json',
+        data: {last_id: last_message_id}
+      })
+      
+      .done(function(messages) {
+        var insertHTML = '';
+
+        messages.forEach(function (message){
+          insertHTML = buildHTML(message);
+          $('.messages').append(insertHTML);
+        })
+        $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight}, 'fast');
+      })
+
+      .fail(function() {
+        console.log('error');
+      });
+    }  
+  };
+  setInterval(reloadMessages, 3000);
+});
+
