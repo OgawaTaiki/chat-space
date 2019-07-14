@@ -18,3 +18,4 @@
 
 public/uploads/*
 .vscode/*
+config/secrets.yml
